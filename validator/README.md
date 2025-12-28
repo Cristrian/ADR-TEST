@@ -41,7 +41,7 @@ El validador verifica que el archivo cumpla con las siguientes reglas:
 - El archivo debe tener **exactamente 5 columnas** en todas las filas
 - El archivo **no requiere encabezado** (la primera fila se trata como datos)
 - El archivo puede tener **cualquier extensión** (solo importa que esté separado por comas)
-- El archivo debe estar codificado en **UTF-8**
+
 
 ### Validación por Columna
 
@@ -55,8 +55,7 @@ El validador verifica que el archivo cumpla con las siguientes reglas:
 
 - Detecta **todos los errores** en el archivo, no solo el primero
 - Muestra errores detallados indicando la fila, columna y el problema específico
-- Interfaz web moderna y fácil de usar
-- Validación en tiempo real sin necesidad de base de datos
+
 
 ## Estructura del Proyecto
 
