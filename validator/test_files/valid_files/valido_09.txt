@@ -1,0 +1,5 @@
+999,cliente1@empresa.com,CC,700000,RegistroA
+8888,cliente2@empresa.com,TI,800000,RegistroB
+77777,cliente3@empresa.com,CC,900000,RegistroC
+666666,cliente4@empresa.com,TI,1000000,RegistroD
+5555555,cliente5@empresa.com,CC,1100000,RegistroE

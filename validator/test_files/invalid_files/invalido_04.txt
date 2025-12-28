@@ -1,0 +1,5 @@
+123,juan@mail.com,CE,500000,Algo
+456,ana@test.co,cc,600000,Texto
+789,pedro@dom.com,PAS,700000,Mas
+987,laura@example.org,TI,800000,Valida
+654,maria@correo.es,CC,900000,Valida2

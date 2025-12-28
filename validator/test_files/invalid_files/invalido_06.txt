@@ -1,0 +1,5 @@
+12,malcorreo,XX,100,prueba
+4567,ana@test.co,TI,600000,Valida
+7890,pedro@dom.com,CC,700000,Valida2
+12345678901,otro@dom.com,CC,800000,ErrorId
+999,correo_sin_at,TI,900000,ErrorCorreo

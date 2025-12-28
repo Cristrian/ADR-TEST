@@ -1,0 +1,11 @@
+777,hector@correo.com,CC,510000,Linea1
+8888,brenda@mail.co,TI,1490000,Linea2
+99999,ricardo@test.org,CC,700000,Linea3
+111111,gloria@example.com,TI,900000,Linea4
+2222222,oscar@dominio.es,CC,1200000,Linea6
+2222222,oscar@dominio.es,CC,1200000,Linea7
+2222222,oscar@dominio.es,CC,1200000,Linea8
+2222222,oscar@dominio.es,CC,1200000,Linea9
+2222222,oscar@dominio.es,CC,1200000,Linea10
+2222222,oscar@dominio.es,CC,1200000,Linea11
+2222222,oscar@dominio.es,CC,1200000,Linea12

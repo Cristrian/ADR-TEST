@@ -1,0 +1,5 @@
+123,juan@mail.com,CC,500000,Texto con, coma
+456,ana@test.co,TI,600000,SinComa
+789,pedro@dom.com,CC,700000,SinComa2
+987,laura@example.org,TI,800000,SinComa3
+654,maria@correo.es,CC,900000,SinComa4

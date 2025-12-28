@@ -1,0 +1,5 @@
+333,ramiro@correo.com,CC,510000,Item1
+4444,sara@mail.co,TI,520000,Item2
+55555,cristina@test.org,CC,530000,Item3
+666666,pablo@example.com,TI,540000,Item4
+7777777,tania@dominio.es,CC,550000,Item5

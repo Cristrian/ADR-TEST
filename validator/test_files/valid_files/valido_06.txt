@@ -1,0 +1,5 @@
+101,leo@correo.com,TI,600000,Prueba1
+2020,nora@mail.co,CC,700000,Prueba2
+30303,hugo@test.org,TI,800000,Prueba3
+404040,lola@example.com,CC,900000,Prueba4
+5050505,enrique@dominio.es,TI,1000000,Prueba5

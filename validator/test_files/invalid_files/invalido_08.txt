@@ -1,0 +1,5 @@
+,juan@mail.com,CC,500000,Algo
+456,,CC,600000,Texto
+789,ana@test.co,,700000,Otro
+987,laura@test.co,CC,,Final
+654,maria@test.co,TI,800000,

@@ -1,0 +1,6 @@
+12,juan@mail.com,CC,500000,Algo
+abc,ana@test.co,TI,600000,Texto
+12345678901,pedro@dominio.com,CC,700000,Mas
+45678,laura@example.org,TI,800000,Prueba
+987654,maria@correo.es,CC,900000,Final
+

@@ -1,0 +1,5 @@
+321,carlos@correo.com,TI,900000,Registro1
+6543,luisa@mail.co,CC,520000,Registro2
+98765,andres@dominio.org,TI,1450000,Registro3
+234567,sofia@example.com,CC,800000,Registro4
+8765432,paula@test.es,TI,600500,Registro5

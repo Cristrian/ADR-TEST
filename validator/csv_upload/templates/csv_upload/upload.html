@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de Archivos CSV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #003087 0%, #005EB8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #003087;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            color: #666666;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #005EB8;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            background: #F5F6F5;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #003087;
+            background: #4FC3F7;
+        }
+        
+        .upload-area.dragover {
+            border-color: #003087;
+            background: #4FC3F7;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        
+        input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .file-label {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #003087;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .file-label:hover {
+            background: #005EB8;
+        }
+        
+        .file-name {
+            margin-top: 15px;
+            color: #333333;
+            font-weight: 500;
+        }
+        
+        .verify-button {
+            width: 100%;
+            padding: 14px;
+            background: #003087;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .verify-button:hover:not(:disabled) {
+            background: #005EB8;
+        }
+        
+        .verify-button:disabled {
+            background: #666666;
+            cursor: not-allowed;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .result.valid {
+            background: rgba(0, 166, 81, 0.1);
+            border: 1px solid #00A651;
+            color: #003087;
+        }
+        
+        .result.invalid {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .result-details {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .result-details ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #003087;
+        }
+        
+        .spinner {
+            border: 3px solid #F5F6F5;
+            border-top: 3px solid #003087;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Validador de Archivos CSV</h1>
+        <p class="subtitle">Carga un archivo CSV y verifica su estructura</p>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="file-input-wrapper">
+                <input type="file" id="csvFile" name="csv_file" required>
+                <label for="csvFile" class="file-label">Elegir Archivo CSV</label>
+            </div>
+            <div class="file-name" id="fileName"></div>
+        </div>
+        
+        <button class="verify-button" id="verifyButton" disabled>Verificar Estructura del Archivo</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Verificando estructura del archivo...</p>
+        </div>
+        
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        const fileInput = document.getElementById('csvFile');
+        const fileName = document.getElementById('fileName');
+        const verifyButton = document.getElementById('verifyButton');
+        const uploadArea = document.getElementById('uploadArea');
+        const result = document.getElementById('result');
+        const loading = document.getElementById('loading');
+        
+        // Manejar selección de archivo
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                fileName.textContent = `Seleccionado: ${file.name}`;
+                verifyButton.disabled = false;
+                result.style.display = 'none';
+            } else {
+                fileName.textContent = '';
+                verifyButton.disabled = true;
+            }
+        });
+        
+        // Funcionalidad de arrastrar y soltar
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                fileName.textContent = `Seleccionado: ${files[0].name}`;
+                verifyButton.disabled = false;
+                result.style.display = 'none';
+            }
+        });
+        
+        // Clic en botón de verificación
+        verifyButton.addEventListener('click', function() {
+            const file = fileInput.files[0];
+            if (!file) {
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('csv_file', file);
+            
+            // Mostrar carga, ocultar resultado
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            verifyButton.disabled = true;
+            
+            fetch('/verify/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                verifyButton.disabled = false;
+                result.style.display = 'block';
+                
+                if (data.valid) {
+                    result.className = 'result valid';
+                    result.innerHTML = `
+                        <div class="result-title">✓ ¡La Estructura del Archivo es Válida!</div>
+                        <div class="result-details">
+                            <p><strong>Columnas:</strong> ${data.details.columns}</p>
+                            <p><strong>Filas:</strong> ${data.details.rows}</p>
+                        </div>
+                    `;
+                } else {
+                    result.className = 'result invalid';
+                    let errorDetails = `<div class="result-title">✗ La Estructura del Archivo es Inválida</div>`;
+                    errorDetails += `<p><strong>Error:</strong> ${data.error}</p>`;
+                    
+                    if (data.details) {
+                        if (data.details.inconsistent_rows) {
+                            errorDetails += `<div class="result-details">`;
+                            errorDetails += `<p><strong>Filas Inconsistentes:</strong></p><ul>`;
+                            data.details.inconsistent_rows.forEach(row => {
+                                errorDetails += `<li>Fila ${row.row}: Se esperaban ${row.expected} columnas, se encontraron ${row.actual}</li>`;
+                            });
+                            errorDetails += `</ul></div>`;
+                        }
+                        if (data.details.validation_errors) {
+                            errorDetails += `<div class="result-details">`;
+                            errorDetails += `<p><strong>Errores de Validación:</strong></p><ul>`;
+                            data.details.validation_errors.forEach(err => {
+                                errorDetails += `<li>Fila ${err.row}, ${err.error} (valor: "${err.value}")</li>`;
+                            });
+                            errorDetails += `</ul></div>`;
+                        }
+                    }
+                    
+                    result.innerHTML = errorDetails;
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                verifyButton.disabled = false;
+                result.style.display = 'block';
+                result.className = 'result invalid';
+                result.innerHTML = `
+                    <div class="result-title">✗ Error</div>
+                    <p>Ocurrió un error: ${error.message}</p>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
+

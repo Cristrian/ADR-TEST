@@ -1,0 +1,5 @@
+id,email,tipo,valor,descripcion
+123,cliente1@empresa.com,CC,500000,Registro1
+456,cliente2@empresa.com,TI,600000,Registro2
+789,cliente3@empresa.com,CC,700000,Registro3
+987,cliente4@empresa.com,TI,800000,Registro4

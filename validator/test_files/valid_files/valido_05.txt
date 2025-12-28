@@ -1,0 +1,6 @@
+1234,alejandro@correo.com,CC,510000,Data1
+2345,karina@mail.co,TI,520000,Data2
+3456,esteban@test.org,CC,530000,Data3
+4567,marcela@example.com,TI,540000,Data4
+5678,felipe@dominio.es,CC,550000,Data5
+

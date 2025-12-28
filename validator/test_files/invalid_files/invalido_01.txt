@@ -1,0 +1,5 @@
+123,juan@mail.com,CC,500000
+7890,ana@test.co,TI,750000,Texto,Extra
+45678,pedro@dominio.com,CC,1500000,Otro
+987654,laura@example.org,TI,600000,Prueba
+3456789,maria@correo.es,CC,1300000,Final

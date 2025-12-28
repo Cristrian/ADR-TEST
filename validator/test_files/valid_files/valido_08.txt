@@ -1,0 +1,5 @@
+12345678,roberto@correo.com,TI,600000,LineaA
+23456789,adriana@mail.co,CC,610000,LineaB
+345678901,jorge@test.org,TI,620000,LineaC
+4567890123,monica@example.com,CC,630000,LineaD
+567890123,estela@dominio.es,TI,640000,LineaE

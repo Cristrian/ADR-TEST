@@ -1,0 +1,5 @@
+555,iris@correo.com,TI,500000,OK1
+6666,simon@mail.co,CC,650000,OK2
+77777,elena@test.org,TI,1300000,OK3
+888888,julio@example.com,CC,1400000,OK4
+9999999,patricia@dominio.es,TI,800000,OK5
